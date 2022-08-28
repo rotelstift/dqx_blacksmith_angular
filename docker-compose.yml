@@ -1,6 +1,8 @@
 version: '3'
 services:
   node:
+    environment:
+      - NG_CLI_ANALYTICS=false
     build: .
     ports:
       - "4200:4200"
