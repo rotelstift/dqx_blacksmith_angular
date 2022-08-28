@@ -6,6 +6,6 @@ services:
       - "4200:4200"
       - "9876:9876"
     volumes:
-      - ".:/projects"
+      - "./dqx_blacksmith:/projects"
     tty: true
     command: /bin/bash -c "ng serve --host 0.0.0.0"
