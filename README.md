@@ -2,4 +2,4 @@
 
 ## About this app
 
-This app is interactive temparture list of DQX blacksmith.
+This app is interactive temperature list of DQX blacksmith.
