@@ -3,11 +3,9 @@
 
   <ul class="flex">
     <li class="m-1" *ngFor="let tool of tools">
-      <button class="rounded border-gray-500 border-2 p-1" [class.selected]="tool === selectedTool" type="button" (click)="onSelect(tool)">
+      <a class="rounded border-gray-500 border-2 p-1" routerLink="{{tool.alias}}">
         {{tool.name}}
-      </button>
+      </a>
     </li>
   </ul>
 </div>
-
-<app-tool-detail [tool]="selectedTool"></app-tool-detail>

@@ -2,13 +2,15 @@
   <h1 class="text-3xl font-bold underline">
     DQX 鍛冶職人 動く温度管理表
   </h1>
-  
-  <app-tools></app-tools>
 
-  <app-weapons></app-weapons>
+  <nav class="m-2 text-white text-xl">
+    <a class="rounded bg-teal-900 p-1 m-1" routerLink="tools">道具職人</a>
+    <a class="rounded bg-teal-900 p-1 m-1" routerLink="protections">防具職人</a>
+    <a class="rounded bg-teal-900 p-1 m-1" routerLink="weapons">武器職人</a>
+  </nav>
 
-  <app-protections></app-protections>
-  
+  <router-outlet></router-outlet>
+
   <div>
     <canvas #canvas01></canvas>
   </div>  

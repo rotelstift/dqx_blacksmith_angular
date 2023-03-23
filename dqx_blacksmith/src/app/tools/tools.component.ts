@@ -1,6 +1,6 @@
 import { Component } from '@angular/core'
 import { Tool } from '../tool'
-import { TOOLS } from '../tools'
+import { ToolService } from '../tool.service';
 
 @Component({
   selector: 'app-tools',
@@ -8,10 +8,18 @@ import { TOOLS } from '../tools'
   styleUrls: ['./tools.component.scss']
 })
 export class ToolsComponent {
-  tools = TOOLS
-  selectedTool?: Tool;
+  tools: Tool[] = []
 
-  onSelect(tool: Tool): void {
-    this.selectedTool = tool;
+  constructor(
+    private toolService: ToolService
+  ) {}
+
+  ngOnInit(): void {
+    this.getTools()
+  }
+
+  getTools(): void {
+    this.toolService.getTools()
+      .subscribe(tools => this.tools = tools)
   }
 }
