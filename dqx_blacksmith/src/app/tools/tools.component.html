@@ -2,6 +2,12 @@
   <h2 class="text-xl font-bold">道具職人</h2>
 
   <ul class="flex">
-    <li class="m-1" *ngFor="let tool of tools">{{tool.name}}</li>
+    <li class="m-1" *ngFor="let tool of tools">
+      <button class="rounded border-gray-500 border-2 p-1" [class.selected]="tool === selectedTool" type="button" (click)="onSelect(tool)">
+        {{tool.name}}
+      </button>
+    </li>
   </ul>
 </div>
+
+<app-tool-detail [tool]="selectedTool"></app-tool-detail>

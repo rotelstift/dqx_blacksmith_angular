@@ -16,7 +16,7 @@ export const TOOLS: Tool[] = [
     name: '光のフライパン',
     alias: 'hikari-no-furaipan',
     type: 'flyingPan',
-    bullet: 'lightning',
+    bullet: 'criticalUp',
     successZone: [
       [92, 102],[110, 120],
       [134, 146],[158, 164],

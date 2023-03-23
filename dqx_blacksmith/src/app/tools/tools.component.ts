@@ -1,4 +1,5 @@
 import { Component } from '@angular/core'
+import { Tool } from '../tool'
 import { TOOLS } from '../tools'
 
 @Component({
@@ -8,4 +9,9 @@ import { TOOLS } from '../tools'
 })
 export class ToolsComponent {
   tools = TOOLS
+  selectedTool?: Tool;
+
+  onSelect(tool: Tool): void {
+    this.selectedTool = tool;
+  }
 }
