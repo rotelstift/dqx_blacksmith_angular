@@ -14,6 +14,7 @@ import { FlyingPanComponent } from './tool-type/flying-pan/flying-pan.component'
 import { MaterialComponent } from './tool-type/material/material.component';
 import { DamageFormComponent } from './damage-form/damage-form.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { TemperatureSliderComponent } from './temperature-slider/temperature-slider.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     ChartCanvasComponent,
     FlyingPanComponent,
     MaterialComponent,
-    DamageFormComponent
+    DamageFormComponent,
+    TemperatureSliderComponent
   ],
   imports: [
     BrowserModule,
