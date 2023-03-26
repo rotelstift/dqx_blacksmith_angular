@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { FormControl } from '@angular/forms';
 
 @Component({
@@ -7,9 +7,15 @@ import { FormControl } from '@angular/forms';
   styleUrls: ['./temperature-slider.component.scss']
 })
 export class TemperatureSliderComponent {
-  temperatureSliderControl = new FormControl()
+  constructor() {  }
+  temperatureSliderControl = new FormControl(1000, {updateOn: 'change'})
 
-  ngOnChanges() {
-    
+  @Output() temperature = new EventEmitter<number>()
+
+  ngOnInit(){
+    this.temperatureSliderControl.valueChanges.subscribe(x => {
+      // console.log(x)
+      this.temperature.emit(x ?? 1000)
+    })
   }
 }

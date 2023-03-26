@@ -8,4 +8,8 @@ import { Tool } from 'src/app/tool';
 })
 export class FlyingPanComponent {
   @Input() flyingPan?: Tool
+
+  onSetTemperature(temperature: number) {
+    console.log(temperature)
+  }
 }
