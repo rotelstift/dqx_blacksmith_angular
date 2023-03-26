@@ -149,6 +149,7 @@ export class ChartCanvasComponent implements AfterViewInit {
       options: {
         responsive: true,
         indexAxis: 'y',
+        animation: false,
         scales: {
           x: {
             min: 0,
