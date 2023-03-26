@@ -3,6 +3,6 @@ export interface Weapon {
     alias: string
     type: string // 剣とかブーメランとか
     class: number // 装備可能レベル
-    bullet: string // normal | criticalUp | doubleAndHalf | reduce | concentrationChanging
+    bullion: string // normal | criticalUp | doubleAndHalf | reduce | concentrationChanging
     successZone: Array<Array<number>>
 }

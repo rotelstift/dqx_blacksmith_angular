@@ -7,7 +7,7 @@ export const PROTECTIONS: Protection[] = [
     type: 'metes',
     class: 85,
     series: 'tenkyukishiSet',
-    bullet: 'criticalUp',
+    bullion: 'criticalUp',
     successZone: [
       [190, 202], [239, 245],
       [190, 202], [239, 245]
@@ -19,7 +19,7 @@ export const PROTECTIONS: Protection[] = [
     type: 'tops',
     class: 85,
     series: 'tenkyukishiSet',
-    bullet: 'criticalUp',
+    bullion: 'criticalUp',
     successZone: [
       [141, 149], [141, 149],
       [166, 177], [166, 177],
@@ -32,7 +32,7 @@ export const PROTECTIONS: Protection[] = [
     type: 'bottoms',
     class: 85,
     series: 'tenkyukishiSet',
-    bullet: 'criticalUp',
+    bullion: 'criticalUp',
     successZone: [
       [111, 117], [152, 160],
       [152, 160], [111, 117],
@@ -46,7 +46,7 @@ export const PROTECTIONS: Protection[] = [
     type: 'arms',
     class: 85,
     series: 'tenkyukishiSet',
-    bullet: 'criticalUp',
+    bullion: 'criticalUp',
     successZone: [
       [280, 291],
       [245, 255],
@@ -59,7 +59,7 @@ export const PROTECTIONS: Protection[] = [
     type: 'foots',
     class: 85,
     series: 'tenkyukishiSet',
-    bullet: 'criticalUp',
+    bullion: 'criticalUp',
     successZone: [
                   [190, 201],
                   [220, 230],

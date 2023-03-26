@@ -6,7 +6,7 @@ export const WEAPONS: Weapon[] = [
     alias: 'tenma-no-taiken',
     type: 'doubleHandedSword',
     class: 60,
-    bullet: 'doubleAndHalf',
+    bullion: 'doubleAndHalf',
     successZone: [
       [70, 78], [132, 138],
       [100, 107], [70, 78],

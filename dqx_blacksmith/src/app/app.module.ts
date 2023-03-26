@@ -9,6 +9,11 @@ import { ToolsComponent } from './tools/tools.component';
 import { ToolDetailComponent } from './tool-detail/tool-detail.component';
 import { WeaponDetailComponent } from './weapon-detail/weapon-detail.component';
 import { ProtectionDetailComponent } from './protection-detail/protection-detail.component';
+import { ChartCanvasComponent } from './chart-canvas/chart-canvas.component';
+import { FlyingPanComponent } from './tool-type/flying-pan/flying-pan.component';
+import { MaterialComponent } from './tool-type/material/material.component';
+import { DamageFormComponent } from './damage-form/damage-form.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -18,11 +23,16 @@ import { ProtectionDetailComponent } from './protection-detail/protection-detail
     ToolsComponent,
     ToolDetailComponent,
     WeaponDetailComponent,
-    ProtectionDetailComponent
+    ProtectionDetailComponent,
+    ChartCanvasComponent,
+    FlyingPanComponent,
+    MaterialComponent,
+    DamageFormComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

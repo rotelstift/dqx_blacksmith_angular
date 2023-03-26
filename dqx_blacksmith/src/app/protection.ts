@@ -4,6 +4,6 @@ export interface Protection {
     type: string // 頭とか足とか
     class: number // 装備可能レベル
     series: string // ~set
-    bullet: string // normal | criticalUp | doubleAndHalf | reduce | concentrationChanging
+    bullion: string // normal | criticalUp | doubleAndHalf | reduce | concentrationChanging
     successZone: Array<Array<number>>
 }
