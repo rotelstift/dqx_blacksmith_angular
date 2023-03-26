@@ -17,6 +17,7 @@ export class ChartCanvasComponent implements AfterViewInit {
   @Input() bullion?: string
   @Input() positionNumber: number | any
   @Input() damage?: number
+  @Input() temperature?: number
 
   canvas: Chart | any
   damageChartContext: CanvasRenderingContext2D | any;
@@ -27,7 +28,7 @@ export class ChartCanvasComponent implements AfterViewInit {
   }
 
   ngAfterViewInit() {
-    const damageRange = this.damageCalculator.damageRange(1000, this.bullion ?? 'normal')
+    const damageRange = this.damageCalculator.damageRange(this.temperature ?? 1000, this.bullion ?? 'normal')
     const canvasBackgroundColor = {
       id: 'canvasBackgroundColor',
       zone: this.successZone ?? [[]],
@@ -157,7 +158,7 @@ export class ChartCanvasComponent implements AfterViewInit {
 
   addDamage = (chart:Chart | any, damage:number) => {
     if(chart) {
-      const damageRange = this.damageCalculator.damageRange(1000, this.bullion ?? 'normal', damage)
+      const damageRange = this.damageCalculator.damageRange(this.temperature ?? 1000, this.bullion ?? 'normal', damage)
       chart.data.datasets[0].data = [
         {x: damageRange[0], y: 'damage'},
         {x: damageRange[2], y: 'damage'},

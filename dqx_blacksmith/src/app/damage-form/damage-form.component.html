@@ -4,6 +4,12 @@
     <input type="number" id="damage{{positionNumber}}" [formControl]="damageFormControl" min="0" value="0" class="w-11/12 form-input h-6 text-lg">
   </div>
   <div class="col-start-2 col-span-2 min-h-max">
-      <app-chart-canvas [bullion]="item?.bullion" [successZone]="item?.successZone" [positionNumber]="positionNumber" [damage]="damageFormControl.value"></app-chart-canvas>
+      <app-chart-canvas 
+        [bullion]="item?.bullion" 
+        [successZone]="item?.successZone" 
+        [positionNumber]="positionNumber" 
+        [damage]="damageFormControl.value"
+        [temperature]="temperature"
+      ></app-chart-canvas>
   </div>
 </div>
