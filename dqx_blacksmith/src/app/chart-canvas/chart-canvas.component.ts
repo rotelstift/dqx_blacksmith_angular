@@ -16,7 +16,7 @@ export class ChartCanvasComponent implements AfterViewInit {
   @Input() successZone: Array<Array<number>> | any
   @Input() bullion?: string
   @Input() positionNumber: number | any
-  @Input() damage?: number
+  @Input() damage: number | any
   @Input() temperature?: number
 
   canvas: Chart | any

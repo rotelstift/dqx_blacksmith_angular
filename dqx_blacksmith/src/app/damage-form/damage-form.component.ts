@@ -13,5 +13,5 @@ export class DamageFormComponent {
   @Input() item?: Tool | Protection | Weapon
   @Input() positionNumber?: number
   @Input() temperature?: number
-  damageFormControl = new FormControl()
+  damageFormControl = new FormControl(0)
 }
