@@ -150,19 +150,19 @@ export class ChartCanvasComponent implements AfterViewInit {
             ticks: {
               display: false,
               stepSize: 30
+            },
+            grid: {
+              drawTicks: false
             }
           },
           y: {
             ticks: {
               display: false
+            },
+            grid: {
+              drawTicks: false
             }
-          }
-        },
-        layout: {
-          padding: {
-            left: -10,
-            bottom: -10
-          }
+          },
         },
         plugins: {
           legend: {
