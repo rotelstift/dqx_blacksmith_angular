@@ -23,26 +23,51 @@ export class ChartCanvasComponent implements AfterViewInit {
   damageChartContext: CanvasRenderingContext2D | any;
   @ViewChild('canvas02') canvas02: ElementRef | any;
 
+  overDamage = (itemMax:number, damageMax:number) => {
+    return itemMax - damageMax;
+  }
+  
+  fakeCritical = (itemMax:number, damageMin:number) => {
+    return itemMax - damageMin * 2;
+  }
+
   ngOnChanges() {
     this.addDamage(this.canvas, this.damage ?? 0)
   }
 
   ngAfterViewInit() {
     const damageRange = this.damageCalculator.damageRange(this.temperature ?? 1000, this.bullion ?? 'normal')
+    const damageNormal = damageRange[2]
+    const damageStrong = damageRange[3]
     const canvasBackgroundColor = {
       id: 'canvasBackgroundColor',
       zone: this.successZone ?? [[]],
       positionNumber: this.positionNumber ?? 0,
+      fakeCritical: this.fakeCritical,
+      overDamage: this.overDamage,
       beforeDraw(chart:any, args:any, pluginOptions:any) {
         const { ctx, chartArea: { left, top, right, bottom }, scales: { x, y } } = chart
-        ctx.fillStyle = 'rgba(16, 128, 16, 0.2)'
-        // fullRect(left, top, right, bottom) の順。right と bottom の値は絶対値ではなく、
-        // left top からの差分で計算してるっぽい
-        ctx.fillRect(
-          x.getPixelForValue(this.zone[this.positionNumber][0]),
-          top,
-          x.getPixelForValue(this.zone[this.positionNumber][1]-this.zone[this.positionNumber][0]),
-          bottom
+
+        const bgColors = (bracketLow:number, bracketHigh:number, color:string) => {
+          ctx.fillStyle = color
+          ctx.fillRect(
+            x.getPixelForValue(bracketLow),
+            top,
+            x.getPixelForValue(bracketHigh - bracketLow),
+            bottom
+          )
+        }
+
+        bgColors(this.zone[this.positionNumber][0], this.zone[this.positionNumber][1], 'rgba(16, 128,  16, 0.2)')
+        bgColors(
+          this.fakeCritical(this.zone[this.positionNumber][1], damageStrong[0]), 
+          this.overDamage(this.zone[this.positionNumber][1], damageStrong[1]),
+          'rgba(192, 64, 255, 0.2)'
+        )
+        bgColors(
+          this.fakeCritical(this.zone[this.positionNumber][1], damageNormal[0]), 
+          this.overDamage(this.zone[this.positionNumber][1], damageNormal[1]),
+          'rgba(255, 64, 192, 0.2)'
         )
       }
     }
