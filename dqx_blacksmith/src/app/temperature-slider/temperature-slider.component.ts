@@ -8,5 +8,4 @@ import { FormControl } from '@angular/forms';
 })
 export class TemperatureSliderComponent {
   temperatureSliderControl = new FormControl()
-  temperatureNumberControl = new FormControl()
 }
