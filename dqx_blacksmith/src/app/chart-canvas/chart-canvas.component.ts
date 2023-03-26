@@ -37,15 +37,13 @@ export class ChartCanvasComponent implements AfterViewInit {
 
   ngAfterViewInit() {
     const damageRange = this.damageCalculator.damageRange(this.temperature ?? 1000, this.bullion ?? 'normal')
-    const damageNormal = damageRange[2]
-    const damageStrong = damageRange[3]
     const canvasBackgroundColor = {
       id: 'canvasBackgroundColor',
       zone: this.successZone ?? [[]],
       positionNumber: this.positionNumber ?? 0,
       fakeCritical: this.fakeCritical,
       overDamage: this.overDamage,
-      beforeDraw(chart:any, args:any, pluginOptions:any) {
+      afterDatasetDraw(chart:any, args:any, pluginOptions:any) {
         const { ctx, chartArea: { left, top, right, bottom }, scales: { x, y } } = chart
 
         const bgColors = (bracketLow:number, bracketHigh:number, color:string) => {
@@ -58,17 +56,23 @@ export class ChartCanvasComponent implements AfterViewInit {
           )
         }
 
-        bgColors(this.zone[this.positionNumber][0], this.zone[this.positionNumber][1], 'rgba(16, 128,  16, 0.2)')
-        bgColors(
-          this.fakeCritical(this.zone[this.positionNumber][1], damageStrong[0]), 
-          this.overDamage(this.zone[this.positionNumber][1], damageStrong[1]),
-          'rgba(192, 64, 255, 0.2)'
-        )
-        bgColors(
-          this.fakeCritical(this.zone[this.positionNumber][1], damageNormal[0]), 
-          this.overDamage(this.zone[this.positionNumber][1], damageNormal[1]),
-          'rgba(255, 64, 192, 0.2)'
-        )
+        if (args.index == 1) {
+          bgColors(this.zone[this.positionNumber][0], this.zone[this.positionNumber][1], 'rgba(16, 128,  16, 0.2)')
+        } else if (args.index == 2) {
+          const damageStrong = args.meta._dataset.data[1].x
+          bgColors(
+            this.fakeCritical(this.zone[this.positionNumber][1], damageStrong[0]), 
+            this.overDamage(this.zone[this.positionNumber][1], damageStrong[1]),
+            'rgba(192, 64, 255, 0.2)'
+          )
+        } else if (args.index == 0) {
+          const damageNormal = args.meta._dataset.data[1].x
+          bgColors(
+            this.fakeCritical(this.zone[this.positionNumber][1], damageNormal[0]), 
+            this.overDamage(this.zone[this.positionNumber][1], damageNormal[1]),
+            'rgba(255, 64, 192, 0.2)'
+          )
+        }
       }
     }
     this.damageChartContext = this.canvas02.nativeElement.getContext('2d');
