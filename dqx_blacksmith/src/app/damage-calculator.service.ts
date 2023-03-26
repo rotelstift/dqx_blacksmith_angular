@@ -23,6 +23,9 @@ export class DamageCalculatorService {
   constructor(  ) { }
 
   damageRange(temperature: number, bullion: string = 'normal', damage: number = 0): Array<Array<number>> {
+    if (temperature > 2000) {
+      temperature = 2000
+    }
     switch(bullion) {
       case 'criticalUp':
         if (temperature % 200 === 0) {

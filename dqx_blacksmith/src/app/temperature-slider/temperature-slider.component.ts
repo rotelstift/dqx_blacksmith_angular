@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-temperature-slider',
@@ -6,5 +7,6 @@ import { Component } from '@angular/core';
   styleUrls: ['./temperature-slider.component.scss']
 })
 export class TemperatureSliderComponent {
-
+  temperatureSliderControl = new FormControl()
+  temperatureNumberControl = new FormControl()
 }
