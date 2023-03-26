@@ -1,18 +1,20 @@
-<h2 class="text-center">温度</h2> 
-<div class="grid grid-cols-4">
-  <input 
-    type="number" 
-    [formControl]="temperatureNumberControl" 
-    value="{{temperatureSliderControl.value}}"
-    class="col-start-1"
-  >
+<div class="mb-2">
+  <h2 class="text-center">温度</h2>
+  <div class="grid grid-cols-4">
+    <input 
+      type="number" 
+      [formControl]="temperatureNumberControl" 
+      value="{{temperatureSliderControl.value}}"
+      class="col-start-1 text-lg"
+    >
 
-  <input 
-    type="range" 
-    [formControl]="temperatureSliderControl" 
-    min="0" 
-    max="2400" 
-    step="50"
-    class="col-start-2 col-span-3"
-  >
+    <input 
+      type="range" 
+      [formControl]="temperatureSliderControl" 
+      min="0" 
+      max="2400" 
+      step="50"
+      class="col-start-2 col-span-3"
+    >
+  </div>
 </div>
