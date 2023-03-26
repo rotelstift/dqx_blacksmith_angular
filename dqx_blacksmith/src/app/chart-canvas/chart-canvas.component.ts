@@ -1,5 +1,4 @@
 import { AfterViewInit, Input, Component, ElementRef, ViewChild } from '@angular/core'
-import { FormControl } from '@angular/forms'
 import { Chart, registerables } from 'chart.js'
 import { DamageCalculatorService } from '../damage-calculator.service'
 
