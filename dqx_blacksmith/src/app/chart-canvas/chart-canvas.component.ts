@@ -37,6 +37,7 @@ export class ChartCanvasComponent implements AfterViewInit {
 
   ngAfterViewInit() {
     const damageRange = this.damageCalculator.damageRange(this.temperature ?? 1000, this.bullion ?? 'normal')
+    const baseDamageRange = this.damageCalculator.baseDamageRange(this.temperature ?? 1000, this.bullion)
     const canvasBackgroundColor = {
       id: 'canvasBackgroundColor',
       zone: this.successZone ?? [[]],
@@ -108,12 +109,12 @@ export class ChartCanvasComponent implements AfterViewInit {
             data: [
               {x: [0, 0], y: 'damage'},
               {x: [
-                this.fakeCritical(this.successZone[this.positionNumber][1], damageRange[2][0]), 
-                this.overDamage(this.successZone[this.positionNumber][1], damageRange[2][1]),
+                this.fakeCritical(this.successZone[this.positionNumber][1], baseDamageRange[2][0]), 
+                this.overDamage(this.successZone[this.positionNumber][1], baseDamageRange[2][1]),
               ], y: 'damage'},
               {x: [
-                this.fakeCritical(this.successZone[this.positionNumber][1], damageRange[3][0]), 
-                this.overDamage(this.successZone[this.positionNumber][1], damageRange[3][1])
+                this.fakeCritical(this.successZone[this.positionNumber][1], baseDamageRange[3][0]), 
+                this.overDamage(this.successZone[this.positionNumber][1], baseDamageRange[3][1])
               ], y: 'damage'},
               {x: this.successZone[this.positionNumber], y: 'damage'}
             ],
@@ -195,6 +196,7 @@ export class ChartCanvasComponent implements AfterViewInit {
   addDamage = (chart:Chart | any, damage:number) => {
     if(chart) {
       const damageRange = this.damageCalculator.damageRange(this.temperature ?? 1000, this.bullion ?? 'normal', damage)
+      const baseDamageRange = this.damageCalculator.baseDamageRange(this.temperature ?? 1000, this.bullion)
       chart.data.datasets[0].data = [
         {x: damageRange[0], y: 'damage'},
         {x: damageRange[2], y: 'damage'},
@@ -203,12 +205,12 @@ export class ChartCanvasComponent implements AfterViewInit {
       ]
       chart.data.datasets[1].data[0] = {x: [0, damage], y: 'damage'}
       chart.data.datasets[1].data[1] = {x: [
-        this.fakeCritical(this.successZone[this.positionNumber][1], damageRange[2][0]), 
-        this.overDamage(this.successZone[this.positionNumber][1], damageRange[2][1])
+        this.fakeCritical(this.successZone[this.positionNumber][1], baseDamageRange[2][0]), 
+        this.overDamage(this.successZone[this.positionNumber][1], baseDamageRange[2][1])
       ], y: 'damage'}
       chart.data.datasets[1].data[2] = {x: [
-        this.fakeCritical(this.successZone[this.positionNumber][1], damageRange[3][0]), 
-        this.overDamage(this.successZone[this.positionNumber][1], damageRange[3][1]),
+        this.fakeCritical(this.successZone[this.positionNumber][1], baseDamageRange[3][0]), 
+        this.overDamage(this.successZone[this.positionNumber][1], baseDamageRange[3][1]),
       ], y: 'damage'}
       chart.data.datasets[2].data = [
         {x: damageRange[1], y: 'damage'},
