@@ -104,18 +104,24 @@ export class ChartCanvasComponent implements AfterViewInit {
             borderSkipped: false
           },
           {
-            label: 'ダメージ量,成功ゾーン',
+            label: 'ダメージ量,狙い目ゾーン,上下狙い目ゾーン,成功ゾーン',
             data: [
               {x: [0, 0], y: 'damage'},
+              {x: [
+                this.fakeCritical(this.successZone[this.positionNumber][1], damageRange[2][0]), 
+                this.overDamage(this.successZone[this.positionNumber][1], damageRange[2][1]),
+              ], y: 'damage'},
+              {x: [
+                this.fakeCritical(this.successZone[this.positionNumber][1], damageRange[3][0]), 
+                this.overDamage(this.successZone[this.positionNumber][1], damageRange[3][1])
+              ], y: 'damage'},
               {x: this.successZone[this.positionNumber], y: 'damage'}
             ],
             backgroundColor: [
               'rgba(255, 64, 64, 0.5)',
+              'rgba(255, 64, 192, 0.5)',
+              'rgba(192, 64, 255, 0.5)',
               'rgba(16, 128, 16, 0.5)'
-            ],
-            borderColor: [
-              'rgba(255, 64, 64, 1.0)',
-              'rgba(16, 128, 16, 1.0)'
             ]
           },
           {
@@ -195,6 +201,14 @@ export class ChartCanvasComponent implements AfterViewInit {
         {x: damageRange[6], y: 'damage'}
       ]
       chart.data.datasets[1].data[0] = {x: [0, damage], y: 'damage'}
+      chart.data.datasets[1].data[1] = {x: [
+        this.fakeCritical(this.successZone[this.positionNumber][1], damageRange[2][0]), 
+        this.overDamage(this.successZone[this.positionNumber][1], damageRange[2][1])
+      ], y: 'damage'}
+      chart.data.datasets[1].data[2] = {x: [
+        this.fakeCritical(this.successZone[this.positionNumber][1], damageRange[3][0]), 
+        this.overDamage(this.successZone[this.positionNumber][1], damageRange[3][1]),
+      ], y: 'damage'}
       chart.data.datasets[2].data = [
         {x: damageRange[1], y: 'damage'},
         {x: damageRange[3], y: 'damage'},
