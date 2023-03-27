@@ -3,12 +3,37 @@
     <a routerLink="/">DQX 鍛冶職人 動く温度管理表</a>
   </h1>
 
-  <nav class="m-2 text-white text-xl">
-    <a class="rounded bg-teal-900 p-1 m-1" routerLink="tools">道具職人</a>
-    <a class="rounded bg-teal-900 p-1 m-1" routerLink="protections">防具職人</a>
-    <a class="rounded bg-teal-900 p-1 m-1" routerLink="weapons">武器職人</a>
+  <nav class="text-white text-base text-center">
+    <ul class="grid grid-cols-3">
+      <li class="rounded bg-teal-900 p-1 m-1"><a routerLink="tools">道具職人</a></li>
+      <li class="rounded bg-teal-900 p-1 m-1"><a routerLink="protections">防具職人</a></li>
+      <li class="rounded bg-teal-900 p-1 m-1"><a routerLink="weapons">武器職人</a></li>
+    </ul>
   </nav>
 
   <router-outlet></router-outlet>
 
+  <article>
+    <h2 class="pt-6 text-xl font-bold">使い方</h2>
+
+    <p class="pt-1">まず、上にある「道具職人」「防具職人」「武器職人」の中から職人を選びます。</p>
+    <p class="pt-1">すると対応したアイテム名が表示されるので、温度を確認したいアイテムを選びます。</p>
+    <p class="pt-1">アイテムを選ぶと、そのアイテムのマスに対応したグラフが表示されます。</p>
+    <p class="pt-1">そのグラフには、成功ゾーンが緑色で表示されています。</p>
+    <p class="pt-1">また、グラフの上下の薄い棒をタップすると、叩き方と最小ダメージ、最大ダメージが表示されます。</p>
+    <p class="pt-1">そして、ダメージ欄にゲーム中で確認した現在のダメージ値を入力すると、赤い棒が伸び、同時に叩き方によるダメージ範囲の表示が動きます。</p>
+    <p class="pt-1">これでどの叩き方なら成功ゾーンに届くのか、オーバーしてしまうのかを確認してください。</p>
+    <p class="pt-1">温度によるダメージ変化にも対応しています。温度のスライドバーを動かすと、叩き方によるダメージ範囲の表示もまた変化します。</p>
+    <p class="pt-1">おまけとして、狙い目ゾーンというものも表示しています。</p>
+    <p class="pt-1">
+      狙い目ゾーンでは、ダメージの赤い棒が狙い目ゾーンに入っているときねらい打ちをすると、
+      会心が出たら絶対に本会心になり、会心が出なくても成功ゾーンをはみ出さない範囲を表示しています。
+    </p>
+    <p class="pt-1">
+      上下狙い目ゾーンは上下狙いで会心が出たら本会心かつ会心が出なくてもはみ出さないでいられる範囲のことです。
+    </p>
+    <h3 class="font-bold">免責事項</h3>
+    <p class="pt-1">このサイトの情報でゲーム中に何か不利益を被っても、それに対する責任は持ちません。</p>
+    <p class="pt-1">ご了承ください。</p>
+  </article>
 </div>

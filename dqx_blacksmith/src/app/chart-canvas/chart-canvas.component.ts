@@ -36,15 +36,15 @@ export class ChartCanvasComponent implements AfterViewInit {
   }
 
   ngAfterViewInit() {
-    const damageRange = this.damageCalculator.damageRange(this.temperature ?? 1000, this.bullion ?? 'normal')
-    const baseDamageRange = this.damageCalculator.baseDamageRange(this.temperature ?? 1000, this.bullion)
+    const damageRange = this.damageCalculator.damageRange(this.temperature ?? 1000, 'normal')
+    const baseDamageRange = this.damageCalculator.baseDamageRange(this.temperature ?? 1000, 'normal')
     const canvasBackgroundColor = {
       id: 'canvasBackgroundColor',
       zone: this.successZone ?? [[]],
       positionNumber: this.positionNumber ?? 0,
       fakeCritical: this.fakeCritical,
       overDamage: this.overDamage,
-      afterDatasetDraw(chart:any, args:any, pluginOptions:any) {
+      beforeDatasetDraw(chart:any, args:any, pluginOptions:any) {
         const { ctx, chartArea: { left, top, right, bottom }, scales: { x, y } } = chart
 
         const bgColors = (bracketLow:number, bracketHigh:number, color:string) => {
@@ -187,7 +187,7 @@ export class ChartCanvasComponent implements AfterViewInit {
   addDamage = (chart:Chart | any, damage:number) => {
     if(chart) {
       const damageRange = this.damageCalculator.damageRange(this.temperature ?? 1000, this.bullion ?? 'normal', damage)
-      const baseDamageRange = this.damageCalculator.baseDamageRange(this.temperature ?? 1000, this.bullion)
+      const baseDamageRange = this.damageCalculator.baseDamageRange(this.temperature ?? 1000, this.bullion ?? 'normal')
       chart.data.datasets[0].data = [
         {x: damageRange[0], y: 'damage'},
         {x: damageRange[2], y: 'damage'},
