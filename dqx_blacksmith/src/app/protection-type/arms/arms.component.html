@@ -1,0 +1,15 @@
+<app-temperature-slider (temperature)="onSetTemperature($event)"></app-temperature-slider>
+
+<div class="grid grid-cols-1 w-1/2 mx-auto">
+  <div class="border-t-[1px] border-l-[1px] border-r-[1px] border-gray-700 border-dashed">
+    <app-damage-form [item]="arms" [positionNumber]="0" [temperature]="temperature"></app-damage-form>
+  </div>
+  <div class="border-t-[1px] border-l-[1px] border-r-[1px] border-gray-700 border-dashed">
+    <app-damage-form [item]="arms" [positionNumber]="1" [temperature]="temperature"></app-damage-form>
+  </div>
+  <div class="border-[1px] border-gray-700 border-dashed">
+    <app-damage-form [item]="arms" [positionNumber]="2" [temperature]="temperature"></app-damage-form>
+  </div>
+</div>
+
+

@@ -2,7 +2,7 @@ import { Component, Input } from '@angular/core'
 import { Tool } from '../tool'
 import { ActivatedRoute } from '@angular/router'
 import { Location } from '@angular/common'
-import { ToolService } from '../tool.service'
+import { ItemService } from '../item.service'
 
 @Component({
   selector: 'app-tool-detail',
@@ -15,7 +15,7 @@ export class ToolDetailComponent {
   constructor(
     private route: ActivatedRoute,
     private location: Location,
-    private toolService: ToolService
+    private toolService: ItemService
   ) {}
 
   ngOnInit(): void {

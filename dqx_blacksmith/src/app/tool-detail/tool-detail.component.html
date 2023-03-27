@@ -2,7 +2,7 @@
   <h2 class="text-xl">{{tool.name}}温度表</h2>
 
   <div [ngSwitch]="tool.type">
-    <app-material *ngSwitchCase="'material'"></app-material>
+    <app-material *ngSwitchCase="'material'" [material]="tool"></app-material>
     <app-flying-pan *ngSwitchCase="'flyingPan'" [flyingPan]="tool"></app-flying-pan>
   </div>
 </div>

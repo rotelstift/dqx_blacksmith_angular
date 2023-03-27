@@ -1,6 +1,6 @@
 import { Component } from '@angular/core'
 import { Tool } from '../tool'
-import { ToolService } from '../tool.service';
+import { ItemService } from '../item.service';
 
 @Component({
   selector: 'app-tools',
@@ -11,7 +11,7 @@ export class ToolsComponent {
   tools: Tool[] = []
 
   constructor(
-    private toolService: ToolService
+    private toolService: ItemService
   ) {}
 
   ngOnInit(): void {

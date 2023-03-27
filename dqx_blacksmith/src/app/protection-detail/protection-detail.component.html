@@ -1,1 +1,11 @@
-<p>protection-detail works!</p>
+<div *ngIf="protection">
+  <h2 class="text-xl">{{protection.name}}温度表</h2>
+
+  <div [ngSwitch]="protection.type">
+    <app-bottoms *ngSwitchCase="'bottoms'" [bottoms]="protection"></app-bottoms>
+    <app-tops *ngSwitchCase="'tops'" [tops]="protection"></app-tops>
+    <app-foots *ngSwitchCase="'foots'" [foots]="protection"></app-foots>
+    <app-metes *ngSwitchCase="'metes'" [metes]="protection"></app-metes>
+    <app-arms *ngSwitchCase="'arms'" [arms]="protection"></app-arms>
+  </div>
+</div>

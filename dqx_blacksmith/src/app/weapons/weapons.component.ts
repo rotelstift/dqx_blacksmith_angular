@@ -1,5 +1,6 @@
 import { Component } from '@angular/core'
-import { WEAPONS } from '../weapons'
+import { ItemService } from '../item.service'
+import { Weapon } from '../weapon'
 
 @Component({
   selector: 'app-weapons',
@@ -7,5 +8,18 @@ import { WEAPONS } from '../weapons'
   styleUrls: ['./weapons.component.scss']
 })
 export class WeaponsComponent {
-  weapons = WEAPONS
+  weapons: Weapon[] = []
+
+  constructor(
+    private itemService: ItemService
+  ) {  }
+
+  ngOnInit(): void {
+    this.getWeapons()
+  }
+
+  getWeapons(): void {
+    this.itemService.getWeapons()
+      .subscribe(weapons => this.weapons = weapons)
+  }
 }

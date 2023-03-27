@@ -1,1 +1,7 @@
-<p>weapon-detail works!</p>
+<div *ngIf="weapon">
+  <h2 class="text-xl">{{weapon.name}}温度表</h2>
+
+  <div [ngSwitch]="weapon.type">
+    <app-double-handed-sword *ngSwitchCase="'doubleHandedSword'" [doubleHandedSword]="weapon"></app-double-handed-sword>
+  </div>
+</div>

@@ -15,6 +15,12 @@ import { MaterialComponent } from './tool-type/material/material.component';
 import { DamageFormComponent } from './damage-form/damage-form.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { TemperatureSliderComponent } from './temperature-slider/temperature-slider.component';
+import { BottomsComponent } from './protection-type/bottoms/bottoms.component';
+import { TopsComponent } from './protection-type/tops/tops.component';
+import { FootsComponent } from './protection-type/foots/foots.component';
+import { MetesComponent } from './protection-type/metes/metes.component';
+import { ArmsComponent } from './protection-type/arms/arms.component';
+import { DoubleHandedSwordComponent } from './weapon-type/double-handed-sword/double-handed-sword.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +35,13 @@ import { TemperatureSliderComponent } from './temperature-slider/temperature-sli
     FlyingPanComponent,
     MaterialComponent,
     DamageFormComponent,
-    TemperatureSliderComponent
+    TemperatureSliderComponent,
+    BottomsComponent,
+    TopsComponent,
+    FootsComponent,
+    MetesComponent,
+    ArmsComponent,
+    DoubleHandedSwordComponent
   ],
   imports: [
     BrowserModule,
