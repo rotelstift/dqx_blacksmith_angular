@@ -12,5 +12,6 @@ import { Weapon } from '../weapon'
 export class DamageFormComponent {
   @Input() item?: Tool | Protection | Weapon
   @Input() positionNumber?: number
-  damageFormControl = new FormControl()
+  @Input() temperature?: number
+  damageFormControl = new FormControl(0)
 }

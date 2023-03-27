@@ -1,24 +1,26 @@
+<app-temperature-slider (temperature)="onSetTemperature($event)"></app-temperature-slider>
+
 <div class="grid grid-cols-2">
   <div class="border-t-[1px] border-l-[1px] border-gray-700 border-dashed">
-    <app-damage-form [item]="flyingPan" [positionNumber]="0"></app-damage-form>
+    <app-damage-form [item]="flyingPan" [positionNumber]="0" [temperature]="temperature"></app-damage-form>
   </div>
   <div class="border-t-[1px] border-l-[1px] border-r-[1px] border-gray-700 border-dashed">
-    <app-damage-form [item]="flyingPan" [positionNumber]="1"></app-damage-form>
+    <app-damage-form [item]="flyingPan" [positionNumber]="1" [temperature]="temperature"></app-damage-form>
   </div>
   <div class="border-t-[1px] border-l-[1px] border-gray-700 border-dashed">
-    <app-damage-form [item]="flyingPan" [positionNumber]="2"></app-damage-form>
+    <app-damage-form [item]="flyingPan" [positionNumber]="2" [temperature]="temperature"></app-damage-form>
   </div>
   <div class="border-t-[1px] border-l-[1px] border-r-[1px] border-gray-700 border-dashed">
-    <app-damage-form [item]="flyingPan" [positionNumber]="3"></app-damage-form>
+    <app-damage-form [item]="flyingPan" [positionNumber]="3" [temperature]="temperature"></app-damage-form>
   </div>
   <div class="border-t-[1px] border-l-[1px] border-gray-700 border-dashed">
-    <app-damage-form [item]="flyingPan" [positionNumber]="4"></app-damage-form>
+    <app-damage-form [item]="flyingPan" [positionNumber]="4" [temperature]="temperature"></app-damage-form>
   </div>
   <div class="border-[1px] border-gray-700 border-dashed">
-    <app-damage-form [item]="flyingPan" [positionNumber]="5"></app-damage-form>
+    <app-damage-form [item]="flyingPan" [positionNumber]="5" [temperature]="temperature"></app-damage-form>
   </div>
   <div class="border-[1px] border-gray-700 border-dashed">
-    <app-damage-form [item]="flyingPan" [positionNumber]="6"></app-damage-form>
+    <app-damage-form [item]="flyingPan" [positionNumber]="6" [temperature]="temperature"></app-damage-form>
   </div>
 </div>
 

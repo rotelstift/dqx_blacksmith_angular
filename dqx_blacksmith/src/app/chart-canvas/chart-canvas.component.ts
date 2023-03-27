@@ -1,5 +1,4 @@
 import { AfterViewInit, Input, Component, ElementRef, ViewChild } from '@angular/core'
-import { FormControl } from '@angular/forms'
 import { Chart, registerables } from 'chart.js'
 import { DamageCalculatorService } from '../damage-calculator.service'
 
@@ -17,33 +16,55 @@ export class ChartCanvasComponent implements AfterViewInit {
   @Input() successZone: Array<Array<number>> | any
   @Input() bullion?: string
   @Input() positionNumber: number | any
-  @Input() damage?: number
+  @Input() damage: number | any
+  @Input() temperature?: number
 
   canvas: Chart | any
   damageChartContext: CanvasRenderingContext2D | any;
   @ViewChild('canvas02') canvas02: ElementRef | any;
+
+  overDamage = (itemMax:number, damageMax:number) => {
+    return itemMax - damageMax;
+  }
+  
+  fakeCritical = (itemMax:number, damageMin:number) => {
+    return itemMax - damageMin * 2;
+  }
 
   ngOnChanges() {
     this.addDamage(this.canvas, this.damage ?? 0)
   }
 
   ngAfterViewInit() {
-    const damageRange = this.damageCalculator.damageRange(1000, this.bullion ?? 'normal')
+    const damageRange = this.damageCalculator.damageRange(this.temperature ?? 1000, this.bullion ?? 'normal')
+    const baseDamageRange = this.damageCalculator.baseDamageRange(this.temperature ?? 1000, this.bullion)
     const canvasBackgroundColor = {
       id: 'canvasBackgroundColor',
       zone: this.successZone ?? [[]],
       positionNumber: this.positionNumber ?? 0,
-      beforeDraw(chart:any, args:any, pluginOptions:any) {
+      fakeCritical: this.fakeCritical,
+      overDamage: this.overDamage,
+      afterDatasetDraw(chart:any, args:any, pluginOptions:any) {
         const { ctx, chartArea: { left, top, right, bottom }, scales: { x, y } } = chart
-        ctx.fillStyle = 'rgba(16, 128, 16, 0.2)'
-        // fullRect(left, top, right, bottom) の順。right と bottom の値は絶対値ではなく、
-        // left top からの差分で計算してるっぽい
-        ctx.fillRect(
-          x.getPixelForValue(this.zone[this.positionNumber][0]),
-          top,
-          x.getPixelForValue(this.zone[this.positionNumber][1]-this.zone[this.positionNumber][0]),
-          bottom
-        )
+
+        const bgColors = (bracketLow:number, bracketHigh:number, color:string) => {
+          ctx.fillStyle = color
+          ctx.fillRect(
+            x.getPixelForValue(bracketLow),
+            top,
+            x.getPixelForValue(bracketHigh - bracketLow),
+            bottom
+          )
+        }
+
+        if (args.index == 1) {
+          const damageNormal = args.meta._dataset.data[1].x
+          const damageStrong = args.meta._dataset.data[2].x
+
+          bgColors(this.zone[this.positionNumber][0], this.zone[this.positionNumber][1], 'rgba(16, 128,  16, 0.2)')
+          bgColors(damageStrong[0], damageStrong[1], 'rgba(192, 64, 255, 0.2)')
+          bgColors(damageNormal[0], damageNormal[1], 'rgba(255, 64, 192, 0.2)')
+        } 
       }
     }
     this.damageChartContext = this.canvas02.nativeElement.getContext('2d');
@@ -75,18 +96,24 @@ export class ChartCanvasComponent implements AfterViewInit {
             borderSkipped: false
           },
           {
-            label: 'ダメージ量,成功ゾーン',
+            label: 'ダメージ量,狙い目ゾーン,上下狙い目ゾーン,成功ゾーン',
             data: [
               {x: [0, 0], y: 'damage'},
+              {x: [
+                this.fakeCritical(this.successZone[this.positionNumber][1], baseDamageRange[2][0]), 
+                this.overDamage(this.successZone[this.positionNumber][1], baseDamageRange[2][1]),
+              ], y: 'damage'},
+              {x: [
+                this.fakeCritical(this.successZone[this.positionNumber][1], baseDamageRange[3][0]), 
+                this.overDamage(this.successZone[this.positionNumber][1], baseDamageRange[3][1])
+              ], y: 'damage'},
               {x: this.successZone[this.positionNumber], y: 'damage'}
             ],
             backgroundColor: [
               'rgba(255, 64, 64, 0.5)',
+              'rgba(255, 64, 192, 0.5)',
+              'rgba(192, 64, 255, 0.5)',
               'rgba(16, 128, 16, 0.5)'
-            ],
-            borderColor: [
-              'rgba(255, 64, 64, 1.0)',
-              'rgba(16, 128, 16, 1.0)'
             ]
           },
           {
@@ -114,6 +141,7 @@ export class ChartCanvasComponent implements AfterViewInit {
       options: {
         responsive: true,
         indexAxis: 'y',
+        animation: false,
         scales: {
           x: {
             min: 0,
@@ -121,19 +149,19 @@ export class ChartCanvasComponent implements AfterViewInit {
             ticks: {
               display: false,
               stepSize: 30
+            },
+            grid: {
+              drawTicks: false
             }
           },
           y: {
             ticks: {
               display: false
+            },
+            grid: {
+              drawTicks: false
             }
-          }
-        },
-        layout: {
-          padding: {
-            left: -10,
-            bottom: -10
-          }
+          },
         },
         plugins: {
           legend: {
@@ -158,7 +186,8 @@ export class ChartCanvasComponent implements AfterViewInit {
 
   addDamage = (chart:Chart | any, damage:number) => {
     if(chart) {
-      const damageRange = this.damageCalculator.damageRange(1000, this.bullion ?? 'normal', damage)
+      const damageRange = this.damageCalculator.damageRange(this.temperature ?? 1000, this.bullion ?? 'normal', damage)
+      const baseDamageRange = this.damageCalculator.baseDamageRange(this.temperature ?? 1000, this.bullion)
       chart.data.datasets[0].data = [
         {x: damageRange[0], y: 'damage'},
         {x: damageRange[2], y: 'damage'},
@@ -166,6 +195,14 @@ export class ChartCanvasComponent implements AfterViewInit {
         {x: damageRange[6], y: 'damage'}
       ]
       chart.data.datasets[1].data[0] = {x: [0, damage], y: 'damage'}
+      chart.data.datasets[1].data[1] = {x: [
+        this.fakeCritical(this.successZone[this.positionNumber][1], baseDamageRange[2][0]), 
+        this.overDamage(this.successZone[this.positionNumber][1], baseDamageRange[2][1])
+      ], y: 'damage'}
+      chart.data.datasets[1].data[2] = {x: [
+        this.fakeCritical(this.successZone[this.positionNumber][1], baseDamageRange[3][0]), 
+        this.overDamage(this.successZone[this.positionNumber][1], baseDamageRange[3][1]),
+      ], y: 'damage'}
       chart.data.datasets[2].data = [
         {x: damageRange[1], y: 'damage'},
         {x: damageRange[3], y: 'damage'},

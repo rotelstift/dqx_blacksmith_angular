@@ -23,9 +23,17 @@ export class DamageCalculatorService {
   constructor(  ) { }
 
   damageRange(temperature: number, bullion: string = 'normal', damage: number = 0): Array<Array<number>> {
+    return this.baseDamageRange(temperature, bullion).map(baseDamage => [baseDamage[0] + damage, baseDamage[1] + damage])
+  }
+
+  baseDamageRange(temperature: number, bullion: string = 'normal'): Array<Array<number>> {
+    const actualTemperature = temperature
+    if (temperature > 2000) {
+      temperature = 2000
+    }
     switch(bullion) {
       case 'criticalUp':
-        if (temperature % 200 === 0) {
+        if (actualTemperature % 200 === 0) {
           return [
             [this.damage(this.doubleHit, temperature, this.base_value_min, this.half), this.damage(this.doubleHit, temperature, this.base_value_max, this.half)],
             [this.damage(this.doubleHit, temperature, this.base_value_min, this.weakly), this.damage(this.doubleHit, temperature, this.base_value_max, this.weakly)],
@@ -34,7 +42,7 @@ export class DamageCalculatorService {
             [this.damage(this.doubleHit, temperature, this.base_value_min, this.double), this.damage(this.doubleHit, temperature, this.base_value_max, this.double)],
             [this.damage(this.doubleHit, temperature, this.base_value_min, this.heat), this.damage(this.doubleHit, temperature, this.base_value_max, this.heat)],
             [this.damage(this.doubleHit, temperature, this.base_value_min, this.triple), this.damage(this.doubleHit, temperature, this.base_value_max, this.triple)]
-          ].map(baseDamage => [baseDamage[0] + damage, baseDamage[1] + damage])
+          ]
         }
         return [
           [this.damage(this.normalHit, temperature, this.base_value_min, this.half), this.damage(this.normalHit, temperature, this.base_value_max, this.half)],
@@ -44,9 +52,9 @@ export class DamageCalculatorService {
           [this.damage(this.normalHit, temperature, this.base_value_min, this.double), this.damage(this.normalHit, temperature, this.base_value_max, this.double)],
           [this.damage(this.normalHit, temperature, this.base_value_min, this.heat), this.damage(this.normalHit, temperature, this.base_value_max, this.heat)],
           [this.damage(this.normalHit, temperature, this.base_value_min, this.triple), this.damage(this.normalHit, temperature, this.base_value_max, this.triple)]
-        ].map(baseDamage => [baseDamage[0] + damage, baseDamage[1] + damage])
+        ]
       case 'doubleAndHalf':
-        if (temperature % 400 === 0) {
+        if (actualTemperature % 400 === 0) {
           return [
             [this.damage(this.doubleHit, temperature, this.base_value_min, this.half), this.damage(this.doubleHit, temperature, this.base_value_max, this.half)],
             [this.damage(this.doubleHit, temperature, this.base_value_min, this.weakly), this.damage(this.doubleHit, temperature, this.base_value_max, this.weakly)],
@@ -55,9 +63,9 @@ export class DamageCalculatorService {
             [this.damage(this.doubleHit, temperature, this.base_value_min, this.double), this.damage(this.doubleHit, temperature, this.base_value_max, this.double)],
             [this.damage(this.doubleHit, temperature, this.base_value_min, this.heat), this.damage(this.doubleHit, temperature, this.base_value_max, this.heat)],
             [this.damage(this.doubleHit, temperature, this.base_value_min, this.triple), this.damage(this.doubleHit, temperature, this.base_value_max, this.triple)]
-          ].map(baseDamage => [baseDamage[0] + damage, baseDamage[1] + damage])
+          ]
         }
-        if (temperature % 200 === 0) {
+        if (actualTemperature % 200 === 0) {
           return [
             [this.damage(this.halfHit, temperature, this.base_value_min, this.half), this.damage(this.halfHit, temperature, this.base_value_max, this.half)],
             [this.damage(this.halfHit, temperature, this.base_value_min, this.weakly), this.damage(this.halfHit, temperature, this.base_value_max, this.weakly)],
@@ -66,7 +74,7 @@ export class DamageCalculatorService {
             [this.damage(this.halfHit, temperature, this.base_value_min, this.double), this.damage(this.halfHit, temperature, this.base_value_max, this.double)],
             [this.damage(this.halfHit, temperature, this.base_value_min, this.heat), this.damage(this.halfHit, temperature, this.base_value_max, this.heat)],
             [this.damage(this.halfHit, temperature, this.base_value_min, this.triple), this.damage(this.halfHit, temperature, this.base_value_max, this.triple)]
-          ].map(baseDamage => [baseDamage[0] + damage, baseDamage[1] + damage])
+          ]
         }
         return [
           [this.damage(this.normalHit, temperature, this.base_value_min, this.half), this.damage(this.normalHit, temperature, this.base_value_max, this.half)],
@@ -76,7 +84,7 @@ export class DamageCalculatorService {
           [this.damage(this.normalHit, temperature, this.base_value_min, this.double), this.damage(this.normalHit, temperature, this.base_value_max, this.double)],
           [this.damage(this.normalHit, temperature, this.base_value_min, this.heat), this.damage(this.normalHit, temperature, this.base_value_max, this.heat)],
           [this.damage(this.normalHit, temperature, this.base_value_min, this.triple), this.damage(this.normalHit, temperature, this.base_value_max, this.triple)]
-        ].map(baseDamage => [baseDamage[0] + damage, baseDamage[1] + damage])
+        ]
       default:
         return [
           [this.damage(this.normalHit, temperature, this.base_value_min, this.half), this.damage(this.normalHit, temperature, this.base_value_max, this.half)],
@@ -86,7 +94,7 @@ export class DamageCalculatorService {
           [this.damage(this.normalHit, temperature, this.base_value_min, this.double), this.damage(this.normalHit, temperature, this.base_value_max, this.double)],
           [this.damage(this.normalHit, temperature, this.base_value_min, this.heat), this.damage(this.normalHit, temperature, this.base_value_max, this.heat)],
           [this.damage(this.normalHit, temperature, this.base_value_min, this.triple), this.damage(this.normalHit, temperature, this.base_value_max, this.triple)]
-        ].map(baseDamage => [baseDamage[0] + damage, baseDamage[1] + damage])
+        ]
     }
   }
 
