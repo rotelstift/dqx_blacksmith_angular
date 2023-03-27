@@ -58,22 +58,13 @@ export class ChartCanvasComponent implements AfterViewInit {
         }
 
         if (args.index == 1) {
+          const damageNormal = args.meta._dataset.data[1].x
+          const damageStrong = args.meta._dataset.data[2].x
+
           bgColors(this.zone[this.positionNumber][0], this.zone[this.positionNumber][1], 'rgba(16, 128,  16, 0.2)')
-        } else if (args.index == 2) {
-          const damageStrong = args.meta._dataset.data[1]._x
-          bgColors(
-            this.fakeCritical(this.zone[this.positionNumber][1], damageStrong[0]), 
-            this.overDamage(this.zone[this.positionNumber][1], damageStrong[1]),
-            'rgba(192, 64, 255, 0.2)'
-          )
-        } else if (args.index == 0) {
-          const damageNormal = args.meta._dataset.data[1]._x
-          bgColors(
-            this.fakeCritical(this.zone[this.positionNumber][1], damageNormal[0]), 
-            this.overDamage(this.zone[this.positionNumber][1], damageNormal[1]),
-            'rgba(255, 64, 192, 0.2)'
-          )
-        }
+          bgColors(damageStrong[0], damageStrong[1], 'rgba(192, 64, 255, 0.2)')
+          bgColors(damageNormal[0], damageNormal[1], 'rgba(255, 64, 192, 0.2)')
+        } 
       }
     }
     this.damageChartContext = this.canvas02.nativeElement.getContext('2d');
@@ -84,10 +75,10 @@ export class ChartCanvasComponent implements AfterViewInit {
           {
             label: '手加減打ち,叩く,2倍打ち,3倍打ち',
             data: [
-              {x: damageRange[0], y: 'damage', _x: baseDamageRange[0]},
-              {x: damageRange[2], y: 'damage', _x: baseDamageRange[2]},
-              {x: damageRange[4], y: 'damage', _x: baseDamageRange[4]},
-              {x: damageRange[6], y: 'damage', _x: baseDamageRange[6]}
+              {x: damageRange[0], y: 'damage'},
+              {x: damageRange[2], y: 'damage'},
+              {x: damageRange[4], y: 'damage'},
+              {x: damageRange[6], y: 'damage'}
             ],
             backgroundColor: [
               'rgba(255, 99, 132, 0.2)',
@@ -128,9 +119,9 @@ export class ChartCanvasComponent implements AfterViewInit {
           {
             label: '乱れ打ち,上下打ち,熱風おろし',
             data: [
-              {x: damageRange[1], y: 'damage', _x: baseDamageRange[1]},
-              {x: damageRange[3], y: 'damage', _x: baseDamageRange[3]},
-              {x: damageRange[5], y: 'damage', _x: baseDamageRange[5]}
+              {x: damageRange[1], y: 'damage'},
+              {x: damageRange[3], y: 'damage'},
+              {x: damageRange[5], y: 'damage'}
             ],
             backgroundColor: [
               'rgba(54, 162, 235, 0.2)',
@@ -198,10 +189,10 @@ export class ChartCanvasComponent implements AfterViewInit {
       const damageRange = this.damageCalculator.damageRange(this.temperature ?? 1000, this.bullion ?? 'normal', damage)
       const baseDamageRange = this.damageCalculator.baseDamageRange(this.temperature ?? 1000, this.bullion)
       chart.data.datasets[0].data = [
-        {x: damageRange[0], y: 'damage', _x: baseDamageRange[0]},
-        {x: damageRange[2], y: 'damage', _x: baseDamageRange[2]},
-        {x: damageRange[4], y: 'damage', _x: baseDamageRange[4]},
-        {x: damageRange[6], y: 'damage', _x: baseDamageRange[6]}
+        {x: damageRange[0], y: 'damage'},
+        {x: damageRange[2], y: 'damage'},
+        {x: damageRange[4], y: 'damage'},
+        {x: damageRange[6], y: 'damage'}
       ]
       chart.data.datasets[1].data[0] = {x: [0, damage], y: 'damage'}
       chart.data.datasets[1].data[1] = {x: [
@@ -213,9 +204,9 @@ export class ChartCanvasComponent implements AfterViewInit {
         this.overDamage(this.successZone[this.positionNumber][1], baseDamageRange[3][1]),
       ], y: 'damage'}
       chart.data.datasets[2].data = [
-        {x: damageRange[1], y: 'damage', _x: baseDamageRange[1]},
-        {x: damageRange[3], y: 'damage', _x: baseDamageRange[3]},
-        {x: damageRange[5], y: 'damage', _x: baseDamageRange[5]}
+        {x: damageRange[1], y: 'damage'},
+        {x: damageRange[3], y: 'damage'},
+        {x: damageRange[5], y: 'damage'}
       ]
       chart.update()
     }
