@@ -16,7 +16,7 @@ https://rotelstift.github.io/dqx_blacksmith/
 
 このウェブアプリに問題がある場合は、GitHubの以下のURLから報告してください。
 
-https://github.com/rotelstift/dqx_blacksmith_angular
+https://github.com/rotelstift/dqx_blacksmith_angular/issues
 
 ## チュートリアルやガイド
 
