@@ -17,6 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
+            "baseHref": "/dqx_blacksmith/",
             "outputPath": "dist/dqx_blacksmith",
             "index": "src/index.html",
             "main": "src/main.ts",
